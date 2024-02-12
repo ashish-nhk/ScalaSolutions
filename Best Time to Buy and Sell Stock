@@ -1,0 +1,15 @@
+Best Time to Buy and Sell Stockobject Solution {
+  
+    def maxProfit(prices: Array[Int]): Int = {
+         def maxProfitHelper(prices: Array[Int], minPrice: Int = Int.MaxValue, maxProfit: Int = 0): Int = {
+            if (prices.isEmpty) maxProfit
+            else {
+            val currentPrice = prices.head
+            val newMinPrice = math.min(minPrice, currentPrice)
+            val newMaxProfit = math.max(maxProfit, currentPrice - minPrice)
+            maxProfitHelper(prices.tail, newMinPrice, newMaxProfit)
+            }
+        }
+        maxProfitHelper(prices)
+    }
+}
