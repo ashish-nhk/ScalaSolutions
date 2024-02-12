@@ -1,0 +1,18 @@
+object Solution {
+    def minimumTotal(triangle: List[List[Int]]): Int = {
+        var preRow = List(0)
+        for(curRow <- triangle){
+            var nextRow = List[Int]()
+            for(indx <- 0 until curRow.length){
+                indx match {
+                    case 0 =>  nextRow ++= List(curRow(0) + preRow(0))
+                    case indx if indx == curRow.length-1 => nextRow ++= List(curRow.last + preRow.last)
+                    case indx =>  nextRow ++= List(math.min(preRow(indx) , preRow(indx -1)) + curRow(indx))
+                } 
+            }
+            preRow = nextRow
+           // println(preRow)
+        }
+        preRow.min
+    }
+}
