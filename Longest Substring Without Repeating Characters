@@ -1,0 +1,19 @@
+object Solution {
+    def lengthOfLongestSubstring(s: String): Int = {
+     var longest = 0
+     var left = 0
+     var right = 0
+     val charMap = scala.collection.mutable.Map[Char, Int]()
+ 
+     while (right < s.length) {
+       if (charMap.contains(s(right))) {
+          left = math.max(left, charMap(s(right)) + 1)
+      }
+      charMap(s(right)) = right
+      longest = math.max(longest, right - left + 1)
+      right += 1
+    }
+ 
+  longest
+}
+}
