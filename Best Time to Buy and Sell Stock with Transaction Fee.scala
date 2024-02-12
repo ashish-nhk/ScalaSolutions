@@ -1,18 +1,13 @@
-import scala.collection.mutable._
- 
-object Solution {
-    def maxProfit(prices: Array[Int], fee: Int): Int = {
-        var n = prices.size
-        var buyatday = ArrayBuffer[Int]()
-        var sellatday = ArrayBuffer[Int]()
-        buyatday.append((-1*prices(0)) - fee)
-        sellatday.append(0)
-        for(index<- 1 until n){
-            var currbuy = math.max(buyatday(index-1), sellatday(index-1) - prices(index) - fee )
-            var currsel = math.max(sellatday(index-1) , buyatday(index-1) + prices(index))
-            buyatday.append(currbuy)
-            sellatday.append(currsel)
+class Solution {
+public:
+    int maxProfit(vector<int>& p, int fee) {
+        //see buy and sell stock with cooldown
+        int buy=-p[0]-fee,sell=0;
+        for(int i=1;i<p.size();i++){
+          buy=max(buy,sell-p[i]-fee);
+            sell=max(sell,buy+p[i]);
         }
-        sellatday(n-1)
+        
+        return sell;
     }
-}
+};
